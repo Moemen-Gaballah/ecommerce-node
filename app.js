@@ -1,15 +1,22 @@
 const express = require('express');
 const path = require('path');
+
+const homeRouter = require('./routes/home.route')
+
 const app = express();
 
 app.use(express.static(path.join(__dirname, 'public','assets')));
+app.use(express.static(path.join(__dirname, 'public','images')));
 
 app.set('view engine', 'ejs');
 app.set('views', 'views') // default
 
-app.get('/', (req, res, next) => {
-   res.send('Hello World!')
-});
+app.use('/', homeRouter);
+
+// app.get('/', (req, res, next) => {
+//    // res.send('Hello World!')
+//    res.render('index');
+// });
 
 app.listen(3000, (err) => {
    console.log(err);

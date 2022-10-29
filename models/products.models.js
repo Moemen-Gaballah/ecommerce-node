@@ -21,8 +21,11 @@ exports.getAllProducts = () => {
             return Product.find({})
         }).then(products => {
             mongoose.disconnect();
-            resolve(products)
-        }).catch(err => reject(err))
+            resolve(products);
+        }).catch(err => {
+            mongoose.disconnect();
+            reject(err);
+        })
     })
 
 }
@@ -35,7 +38,10 @@ exports.getProductsByCategory = (category) => {
         }).then(products => {
             mongoose.disconnect();
             resolve(products)
-        }).catch(err => reject(err))
+        }).catch(err => {
+            mongoose.disconnect();
+            reject(err)
+        })
     })
 }
 
@@ -47,7 +53,10 @@ exports.getProductById = id => {
            }).then(product => {
                mongoose.disconnect();
                resolve(product);
-       }).catch(err => reject(err));
+       }).catch(err => {
+           mongoose.disconnect();
+           reject(err)
+       });
     });
 }
 
@@ -59,7 +68,10 @@ exports.getFirstProduct = () => {
             }).then(product => {
             mongoose.disconnect();
             resolve(product);
-        }).catch(err => reject(err));
+        }).catch(err => {
+            mongoose.disconnect();
+            reject(err)
+        });
     });
 }
 

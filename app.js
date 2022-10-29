@@ -3,6 +3,7 @@ const path = require('path');
 
 const homeRouter = require('./routes/home.route')
 const productRouter = require('./routes/product.route')
+const authRouter = require('./routes/auth.route')
 
 const app = express();
 
@@ -13,7 +14,7 @@ app.set('view engine', 'ejs');
 app.set('views', 'views') // default
 
 app.use('/', homeRouter);
-
+app.use('/', authRouter);
 app.use('/product', productRouter)
 // app.get('/', (req, res, next) => {
 //    // res.send('Hello World!')

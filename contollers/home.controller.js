@@ -11,7 +11,7 @@ exports.getHome = (req, res, next) => {
 
     // get Category
     let category = req.query.category;
-    let validCategories = ['clothes', 'phones', 'computers'];
+    let validCategories = ['clothes', 'phones', 'computers', 'accessories'];
     if (category && validCategories.includes(category)){
     // if (category && category !== 'all'){
         productsModel.getProductsByCategory(category).then(products => {

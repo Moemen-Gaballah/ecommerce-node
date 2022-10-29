@@ -37,6 +37,29 @@ exports.getProductsByCategory = (category) => {
             resolve(products)
         }).catch(err => reject(err))
     })
+}
 
+exports.getProductById = id => {
+    return new Promise((resolve, reject) => {
+       mongoose.connect(DB_URL)
+           .then(() => {
+               return Product.findById(id);
+           }).then(product => {
+               mongoose.disconnect();
+               resolve(product);
+       }).catch(err => reject(err));
+    });
+}
+
+exports.getFirstProduct = () => {
+    return new Promise((resolve, reject) => {
+        mongoose.connect(DB_URL)
+            .then(() => {
+                return Product.findOne({});
+            }).then(product => {
+            mongoose.disconnect();
+            resolve(product);
+        }).catch(err => reject(err));
+    });
 }
 

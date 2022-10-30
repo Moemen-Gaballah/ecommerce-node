@@ -1,6 +1,8 @@
 const productsModel = require('../models/products.models')
 
 exports.getHome = (req, res, next) => {
+    console.log(req.session.userId);
+
     // get products
     // render index.ejs
     // productsModel.getAllProducts().then(products => {
@@ -16,13 +18,16 @@ exports.getHome = (req, res, next) => {
     // if (category && category !== 'all'){
         productsModel.getProductsByCategory(category).then(products => {
             res.render('index', {
-                products: products
+                products: products,
+                isUser: req.session.userId
             });
         });
     }else {
         productsModel.getAllProducts().then(products => {
             res.render('index', {
-                products: products
+                products: products,
+                isUser: req.session.userId,
+                validationError: req.flash('validationErrors')[0]
             });
         });
     }

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const {reject} = require("bcrypt/promises");
 
 const DB_URL = 'mongodb://localhost:27017/ecommerce';
 const productSchema = mongoose.Schema({
@@ -71,6 +72,22 @@ exports.getFirstProduct = () => {
         }).catch(err => {
             mongoose.disconnect();
             reject(err)
+        });
+    });
+}
+
+exports.addNewProduct = data => {
+    return new Promise((resolve, reject) => {
+        mongoose.connect(DB_URL)
+            .then(() => {
+                let item = new Product(data)
+                return item.save();
+            }).then(() => {
+                mongoose.disconnect();
+                resolve()
+        }).catch(err => {
+            mongoose.disconnect();
+            reject(err);;
         });
     });
 }

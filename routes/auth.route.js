@@ -17,7 +17,7 @@ router.post('/signup',
         .isEmail().withMessage('invalid email format'),
     check('password')
         .not().isEmpty().withMessage('password is required')
-        .not().isLength({min: 6}).withMessage('password must be at least 6 characters'),
+        .isLength({min: 6}).withMessage('password must be at least 6 characters'),
     check('confirmPassword').custom((value, {req}) => {
         if(value === req.body.password) return true
         else throw 'confirm password no equal password'

@@ -6,7 +6,11 @@ const DB_URL = 'mongodb://localhost:27017/ecommerce';
 const userSchema = mongoose.Schema({
    username: String,
    email: String,
-   password: String
+   password: String,
+    isAdmin: {
+       type: Boolean,
+       default:false
+    }
 });
 
 const User = mongoose.model("user", userSchema);
@@ -33,7 +37,9 @@ exports.createNewUser = (username, email, password) => {
             return user.save()
         }).then(() => {
             mongoose.disconnect();
-            resolve();
+            resolve({
+
+            });
         }).catch(err => {
             mongoose.disconnect();
             reject(err)
@@ -55,7 +61,10 @@ exports.login = (email, password) => {
                         reject('password is incorrect')
                     }else {
                         mongoose.disconnect()
-                        resolve(user._id)
+                        resolve({
+                            id: user._id,
+                            isAdmin: user.isAdmin
+                        })
                     }
                 }).catch(err => {
                     mongoose.disconnect();

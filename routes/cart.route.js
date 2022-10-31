@@ -31,4 +31,9 @@ router.post('/delete',
         cartController.postDelete
     );
 
+
+
+router.post('/delete-all',
+    authGuard.isAuth, cartController.deleteAll)
+
 module.exports = router;

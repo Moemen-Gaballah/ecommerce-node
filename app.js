@@ -9,6 +9,8 @@ const homeRouter = require('./routes/home.route')
 const productRouter = require('./routes/product.route')
 const authRouter = require('./routes/auth.route')
 const cartRouter = require('./routes/cart.route')
+const orderRouter = require('./routes/order.route')
+const adminRouter = require('./routes/admin.route')
 
 const app = express();
 
@@ -34,6 +36,9 @@ app.use('/', homeRouter);
 app.use('/', authRouter);
 app.use('/product', productRouter)
 app.use('/cart', cartRouter);
+app.use('/order', orderRouter);
+app.use("/admin", adminRouter);
+
 // app.get('/', (req, res, next) => {
 //    // res.send('Hello World!')
 //    res.render('index');

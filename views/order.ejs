@@ -18,7 +18,8 @@
                 <td>Price</td>
                 <td>Amount</td>
                 <td>Total</td>
-                <td>Action</td>
+                <td>Address</td>
+                <td>status</td>
             </thead>
             <tbody>
                 <% for (let i = 0; i < items.length; i++) {%>
@@ -26,16 +27,11 @@
                     <td><%= i+1 %></td>
                     <td><%= items[i].name %></td>
                     <td><%= items[i].price %> $ </td>
-                    <form method="POST">
-                        <td><input type="text" name="amount" class="form-control" value="<%= items[i].amount %>"></td>
-                        <td><%= items[i].price * items[i].amount %> $ </td>
-                        <td>
-                            <input type="hidden" name="cartId" value="<%= items[i]._id %>">
-                            <input type="submit" class="btn btn-success" value="Save" formaction="/cart/save">
-                            <input type="submit" class="btn btn-success" value="order" formaction="/order/checkout">
-                            <input type="submit" class="btn btn-danger" value="Delete" formaction="/cart/delete">
-                        </td>
-                    </form>
+                    <td><%= items[i].amount %> </td>
+                    <td><%= items[i].price * items[i].amount %> $ </td>
+                    <td><%= items[i].address %></td>
+                    <td><%= items[i].status %> </td>
+
                 </tr>
                 <% } %>
             </tbody>

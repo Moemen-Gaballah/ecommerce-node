@@ -1,0 +1,33 @@
+<%- include('partials/header') %>
+<%- include('partials/navbar') %>
+
+<div class="container text-center">
+    <h3>Add Product</h3>
+    <form action="/admin/add" method="POST" enctype="multipart/form-data">
+        <input type="text" class="form-control" name="name" placeholder="name">
+        <% let nameError = validationErrors.find(err => err.param === 'name') %>
+        <% if(nameError) { %>
+            <p class="alert alert-danger">
+                <%= nameError.msg %>
+            </p>
+        <% } %>
+
+
+        <input type="number" class="form-control" name="price" placeholder="Price">
+        <% let priceError = validationErrors.find(err => err.param === 'price') %>
+        <% if (priceError) { %>
+        <p class="alert alert-danger"><%= priceError.msg %></p>
+        <% } %>
+        <select class="form-control" name="category">
+            <option value="clothes">Clothes</option>
+            <option value="phones">Phones</option>
+            <option value="computers">Computers</option>
+        </select>
+        <input type="amount" class="form-control" name="amount" placeholder="amount">
+
+
+        <input type="file" class="form-control" name="image" placeholder="image">
+        <input type="submit" class="btn btn-primary" value="Add Product">
+
+    </form>
+</div>

@@ -1,7 +1,7 @@
 const productsModel = require('../models/products.models')
 
 exports.getHome = (req, res, next) => {
-    console.log(req.session.userId);
+    // console.log(req.session.userId);
 
     // get products
     // render index.ejs
@@ -19,7 +19,8 @@ exports.getHome = (req, res, next) => {
         productsModel.getProductsByCategory(category).then(products => {
             res.render('index', {
                 products: products,
-                isUser: req.session.userId
+                isUser: req.session.userId,
+                isAdmin: req.session.isAdmin,
             });
         });
     }else {
@@ -27,6 +28,7 @@ exports.getHome = (req, res, next) => {
             res.render('index', {
                 products: products,
                 isUser: req.session.userId,
+                isAdmin: req.session.isAdmin,
                 validationError: req.flash('validationErrors')[0]
             });
         });

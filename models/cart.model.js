@@ -50,7 +50,8 @@ exports.editItem = (id, newData) => {
         mongoose
             .connect(DB_URL)
             .then(() => {
-                CartItem.updateOne({_id: id}, newData)
+                return CartItem.updateOne({_id: id}, newData)
+                // console.log(CartItem.updateOne({_id: id}, newData))
             }).then(items => {
                 mongoose.disconnect();
                 resolve(items);
@@ -78,4 +79,52 @@ exports.deleteItem = id => {
     });
 }
 
+exports.deleteAll= userId => {
+    return new Promise((resolve, reject) => {
+       mongoose
+           .connect(DB_URL)
+           .then(() => {
+            // CartItem.deleteOne({_id: id})
+            return CartItem.deleteMany({userId: userId})
+           }).then(() => {
+               mongoose.disconnect();
+               resolve();
+       }).catch(err => {
+          mongoose.disconnect();
+          reject(err);
+       });
+    });
+}
+
+
+exports.productExistCart = (productId, userId) => {
+    return new Promise((resolve, reject) => {
+       mongoose.connect(DB_URL)
+           .then(() => {
+               return CartItem.findOne({userId: userId, productId: productId})
+           }
+        ).then((cartItem) => {
+            mongoose.disconnect();
+            resolve(cartItem);
+        }).catch(err => {
+            mongoose.disconnect();
+            reject(err);
+        });
+    });
+}
+
+exports.getItemById = (cartId) => {
+    return new Promise((resolve, reject) => {
+       mongoose.connect(DB_URL)
+           .then(() => {
+              return CartItem.findById(cartId);
+           }).then((cartItem) => {
+               mongoose.disconnect();
+               resolve(cartItem)
+       }).catch(err => {
+           mongoose.disconnect();
+           reject(err);
+       });
+    });
+}
 

@@ -9,6 +9,7 @@ exports.getProducts = (req, res, next) => {
            product: product,
            isUser: req.session.userId,
            isAdmin: req.session.userId,
+           pageTitle: 'Product'
        })
     });
 }

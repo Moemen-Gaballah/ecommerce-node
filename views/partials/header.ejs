@@ -2,7 +2,8 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Home</title>
+    <% if (!pageTitle) var pageTitle = '' %>
+    <title><%= pageTitle %> - Online Shop</title>
     <link rel="stylesheet" href="/css/bootstrap.min.css">
 
 </head>

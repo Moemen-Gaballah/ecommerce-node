@@ -39,15 +39,25 @@ app.use('/cart', cartRouter);
 app.use('/order', orderRouter);
 app.use("/admin", adminRouter);
 
-// app.get('/', (req, res, next) => {
-//    // res.send('Hello World!')
-//    res.render('index');
-// });
+app.use("/error", (req, res, next) => {
+   res.status(500)
+   res.render('error', {
+      isUser: req.session.userId,
+      isAdmin: req.session.isAdmin
+   })
+});
 
-// app.get('/product/:id', (req, res, next) => {
-//    res.send('Hello World!')
-//    // res.render('index');
-// });
+app.get((error, req, res, next) => {
+   res.redirect('/error')
+})
+
+app.get('/not-admin', (req, res, next) => {
+   res.status(403)
+   res.render('not-admin', {
+      isUser: req.session.userId,
+      isAdmin:false
+   })
+})
 
 app.listen(3000, () => {
    console.log('Server listen on port 3000');
